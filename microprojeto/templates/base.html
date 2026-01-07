@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title> Jolly 🎀</title>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-500">
+    
+    <header class="p-10 bg-gradient-to-t from-blue-200 to-pink-200 shadow-sm dark:from-gray-800 dark:to-gray-900">
+        <h1 class="text-center font-bold text-4xl text-blue-900 dark:text-blue-300">Jolly</h1>
+        <h4 class="text-center font-serif text-gray-500 dark:text-gray-400">☆ Seu criador de jogos inteligente ☆</h4>
+        <nav class="mt-4 flex justify-center gap-6 items-center">
+            <a href="/" class="text-blue-900 dark:text-blue-200 hover:text-pink-400 transition">Início</a>
+            <a href="/historico" class="text-blue-900 dark:text-blue-200 hover:text-pink-400 transition">Histórico</a>
+            
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:scale-110 transition">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </nav>
+    </header>
+    
+    <main class="flex-grow flex flex-col items-center justify-center p-6 w-full">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-50 border-t py-4 dark:bg-gray-900 dark:border-gray-800">
+        <div class="flex flex-col items-center text-gray-400 text-sm">
+            <p>&copy; 2025 Jolly. ☆ Criatividade ☆</p>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        btn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+    </script>
+</body>
+</html>

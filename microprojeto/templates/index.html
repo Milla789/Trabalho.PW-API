@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="w-full max-w-5xl flex flex-col items-center">
+
+    {% if resposta %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <div class="w-full bg-white dark:bg-gray-800 border border-pink-100 dark:border-gray-700 rounded-3xl shadow-2xl overflow-hidden mb-12 animate-fade-in">
+        <div class="bg-gradient-to-r from-blue-100 to-pink-100 dark:from-gray-700 dark:to-gray-900 p-5 border-b border-pink-200 dark:border-gray-600">
+            <h2 class="text-center font-bold text-blue-900 dark:text-pink-300 flex items-center justify-center gap-2">
+                <span>✨</span> Seu Jogo: <span>✨</span>
+            </h2>
+        </div>
+
+        <div id="conteudo-jogo" class="p-8 leading-relaxed prose prose-pink dark:prose-invert max-w-none">
+            {{ resposta }}
+        </div>
+    </div>
+    <script>
+        const box = document.getElementById('conteudo-jogo');
+        if (box) {
+            // Renderiza o Markdown e limpa espaços extras
+            box.innerHTML = marked.parse(box.innerText.trim());
+        }
+    </script>
+    {% endif %}
+
+    <div class="w-full max-w-md bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700">
+        <form action="/" method="POST" class="flex flex-col items-center">
+            <label class="block mb-6 text-xl font-medium text-gray-700 dark:text-gray-300 text-center">
+                O que você tem em mãos?
+            </label>
+            <div class="w-full relative group">
+                <input type="text" name="materiais" required
+                       class="w-full border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-900 dark:text-white p-4 rounded-2xl mb-6 focus:border-pink-400 outline-none transition-all pl-12"
+                       placeholder="Ex: 2 copos, papel e clips">
+                <span class="absolute left-4 top-4 text-gray-400 group-focus-within:text-pink-400 transition">🔍</span>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-blue-400 hover:from-pink-500 hover:to-pink-400 text-white font-bold py-4 rounded-2xl transition-all shadow-lg transform hover:-translate-y-1 active:scale-95">
+               ☆ Criar ☆
+            </button>
+        </form>
+    </div>
+</div>
+<style>
+    /* Animação de entrada suave */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+    /* Estilização refinada do conteúdo Markdown (Cores removidas para manter o padrão do sistema) */
+    #conteudo-jogo h2 { font-size: 1.5rem; font-weight: 800; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    #conteudo-jogo strong { font-weight: 700; }
+    #conteudo-jogo ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    #conteudo-jogo p { margin-bottom: 1rem; }
+</style>
+{% endblock %}
